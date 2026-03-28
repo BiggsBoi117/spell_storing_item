@@ -80,7 +80,7 @@ export function SpellBook() {
         <section>
           <h2>My Spellbook</h2>
           {asyncState.data.length === 0 ? (
-            <p>No spells saved yet.</p>
+            <p className="spellbook-empty">No spells saved yet.</p>
           ) : (
             asyncState.data.map((spell) => (
               <div key={spell.spell_index} className="spellbook-entry">

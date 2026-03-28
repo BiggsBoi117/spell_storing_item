@@ -24,6 +24,8 @@
   font-style: italic;
   color: var(--ink-light);
   font-size: 0.95rem;
+  padding: 8px 16px 8px;
+  background-color: var(--parchment);
 }
 
 /* ── Subtitle ──────────────────────────────────────────────────── */
