@@ -129,7 +129,7 @@ router.get("/sync/all", async (req: Request, res: Response) => {
     const { results } = await response.json();
     const total = results.length;
 
-    for (let i = 0; i < results.length; i++) {
+    for (let i = 0; i < total; i++) {
       const spell = results[i];
       const detail = await fetch(`https://www.dnd5eapi.co${spell.url}`);
       const data = await detail.json();
