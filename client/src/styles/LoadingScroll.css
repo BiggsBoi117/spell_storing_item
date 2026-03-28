@@ -1,0 +1,219 @@
+/* ── LoadingSpinner.css ─────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap");
+
+.loading-overlay {
+  --parchment: #f5ecd7;
+  --parchment-dark: #e8d5b0;
+  --ink: #2a1a0e;
+  --ink-light: #5c3d1e;
+  --gold: #c8993a;
+  --gold-light: #e8c56a;
+  --gold-dark: #8b6214;
+  --border: #a07830;
+  --accent: var(--gold);
+  --accent-glow: rgba(200, 153, 58, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 260px;
+  font-family: "IM Fell English", Georgia, serif;
+}
+
+/* ── Card shell (matches .spell-card) ── */
+.loading-card {
+  position: relative;
+  width: 300px;
+  padding: 28px 20px 24px;
+  background:
+    radial-gradient(
+      ellipse at 20% 10%,
+      rgba(255, 248, 220, 0.7) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 90%,
+      rgba(200, 150, 80, 0.18) 0%,
+      transparent 55%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"),
+    var(--parchment);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 40px rgba(160, 120, 40, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  color: var(--ink);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Aged edge vignette */
+.loading-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow: inset 0 0 60px rgba(100, 60, 10, 0.2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Corner flourishes (matches .corner) ── */
+.loading-card .corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--gold-dark);
+  border-style: solid;
+  opacity: 0.7;
+}
+.loading-card .corner-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 2px 0 0 2px;
+}
+.loading-card .corner-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 2px 2px 0 0;
+}
+.loading-card .corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 2px 2px;
+}
+.loading-card .corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Scroll icon wrapper ── */
+.scroll-spinner-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  margin-top: 4px;
+}
+
+/* Slow pulse on the scroll image */
+.scroll-icon {
+  width: 50px;
+  height: 50px;
+  filter: drop-shadow(0 0 10px var(--accent-glow));
+  position: relative;
+  z-index: 2;
+}
+
+/* Orbiting rune ring */
+.rune-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(200, 153, 58, 0.35);
+  animation: runeOrbit 3s linear infinite;
+  z-index: 1;
+}
+
+.rune-ring::after {
+  content: attr(data-rune);
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "IM Fell English", serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  text-shadow: 0 0 8px var(--accent-glow);
+}
+
+@keyframes runeOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Gold glow halo behind scroll */
+.scroll-halo {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(200, 153, 58, 0.18) 0%,
+    transparent 70%
+  );
+  animation: haloBreath 2.4s ease-in-out infinite;
+}
+
+@keyframes haloBreath {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/* ── Divider (matches .spell-divider) ── */
+.loading-divider {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-dark) 20%,
+    var(--gold) 50%,
+    var(--gold-dark) 80%,
+    transparent
+  );
+  z-index: 1;
+}
+
+/* ── Text block ── */
+.loading-text-block {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.loading-title {
+  font-family: "Cinzel", serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin: 0;
+}
+
+.loading-message {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ink-light);
+  margin: 0;
+  min-height: 2.5em;
+}

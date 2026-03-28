@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;600&family=IM+Fell+English:ital@0;1&display=swap");
+
+html,
+body,
+#root {
+  --parchment-dark: #e8d5b0;
+  --parchment: #f5ecd7;
+  --ink: #2a1a0e;
+  --ink-light: #5c3d1e;
+  --gold: #c8993a;
+  --gold-light: #e8c56a;
+  --gold-dark: #8b6214;
+  --border: #a07830;
+  --accent-glow: rgba(200, 153, 58, 0.45);
+
+  height: auto;
+  background-image: url("/swamp.jpg");
+}
+
+.main {
+  height: auto;
+  margin-top: 16px;
+  padding: 0 32px 32px;
+  @media (max-width: 1024px) {
+    padding: 0 16px 16px;
+  }
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.page-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--parchment);
+  border-bottom: var(--border) 2px solid;
+  padding: 0 32px;
+  gap: 32px;
+  flex-wrap: nowrap;
+}
+
+.page-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 24px 8px 8px;
+  user-select: none;
+  border-bottom: none;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.page-title {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(1rem, 4vw, 1.8rem);
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0.08em;
+  text-align: left;
+  margin: 0;
+  padding: 4px 0;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 0 var(--parchment),
+    0 2px 4px rgba(100, 60, 10, 0.35),
+    0 0 24px var(--accent-glow);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links button {
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  font-weight: 600;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px 14px;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.navbar-links button:hover {
+  color: var(--gold-dark);
+  border-color: var(--border);
+}
+
+.navbar-links button.active {
+  color: var(--gold-dark);
+  border-color: var(--gold);
+  background-color: var(--parchment-dark);
+}
+
+/* ── Hamburger ───────────────────────────────────────────────────────────── */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--ink-light);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.navbar-hamburger:hover span {
+  background-color: var(--gold-dark);
+}
+
+/* ── Responsive collapse ─────────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+  .page-header {
+    flex-wrap: nowrap;
+    padding: 0 16px;
+  }
+
+  .navbar {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .navbar-hamburger {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--parchment);
+    border: var(--border) 1px solid;
+    width: 200px;
+    padding: 8px 0;
+    gap: 0;
+    z-index: 100;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links button {
+    width: 100%;
+    text-align: left;
+    padding: 10px 8px;
+  }
+}
+
+/* ── PageTitle and Errors ──────────────────────────────────────────────── */
+
+.error-message {
+  display: flex;
+  height: fit-content;
+  width: fit-content;
+  background-color: var(--parchment);
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px 8px;
+  user-select: none;
+  border: var(--border) 2px solid;
+  color: var(--ink-light);
+  font-family: "IM Fell English", Georgia, serif;
+}
+
+/* ── Subtitle / tagline ── */
+.page-subtitle {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  color: var(--ink-light);
+  border-color: var(--parchment);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 0;
+}
+
+.reload-button {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  color: var(--parchment);
+  border-color: var(--parchment);
+  letter-spacing: 0.04em;
+  text-align: center;
+  margin: 0;
+}
+
+/* ── Decorative rule with centre diamond ── */
+.page-title-rule {
+  position: relative;
+  width: clamp(200px, 50%, 480px);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-dark) 20%,
+    var(--gold) 50%,
+    var(--gold-dark) 80%,
+    transparent
+  );
+  margin: 4px 0;
+}
+
+.page-title-rule::before {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  color: var(--gold);
+  background: transparent;
+  padding: 0 6px;
+  text-shadow: 0 0 8px var(--accent-glow);
+  /* Pull it out of the rule line */
+  line-height: 1;
+}
+
+/* ──── Spacer ───── */
+
+.spacer {
+  height: 16px;
+}

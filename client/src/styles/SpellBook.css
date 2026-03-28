@@ -1,0 +1,131 @@
+/* ── Spellbook Wrapper ─────────────────────────────────────────── */
+.spellbook {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.spellbook h2 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: var(--gold-dark);
+  letter-spacing: 0.08em;
+  margin: 0 0 16px;
+  text-shadow:
+    0 1px 0 var(--parchment),
+    0 2px 4px rgba(100, 60, 10, 0.35);
+}
+
+.spellbook-empty {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  color: var(--ink-light);
+  font-size: 0.95rem;
+}
+
+/* ── Subtitle ──────────────────────────────────────────────────── */
+h2 {
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  font-weight: 600;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+  margin: 0 0 16px;
+  padding: 6px 14px;
+  border: 1px solid var(--gold);
+  background-color: var(--parchment-dark);
+  width: fit-content;
+  border-radius: 2px;
+}
+
+/* ── Entry ─────────────────────────────────────────────────────── */
+.spellbook-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── Compact Row ───────────────────────────────────────────────── */
+.spellbook-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background:
+    radial-gradient(
+      ellipse at 20% 50%,
+      rgba(255, 248, 220, 0.5) 0%,
+      transparent 70%
+    ),
+    var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+.spellbook-row:hover {
+  background-color: var(--parchment-dark);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 0 20px rgba(160, 120, 40, 0.1);
+}
+
+/* ── Spell Name ────────────────────────────────────────────────── */
+.spellbook-row-name {
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* ── Remove Button ─────────────────────────────────────────────── */
+.spellbook-remove {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink-light);
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 2px;
+  opacity: 0.5;
+  transition:
+    opacity 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+  font-family: "Cinzel", serif;
+  flex-shrink: 0;
+}
+
+.spellbook-remove:hover {
+  opacity: 1;
+  color: #8b1a1a;
+  border-color: #8b1a1a;
+}
+
+/* ── Expanded Spell Card ───────────────────────────────────────── */
+.spellbook-expanded {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 4px;
+  animation: expandFade 0.2s ease;
+}
+
+@keyframes expandFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

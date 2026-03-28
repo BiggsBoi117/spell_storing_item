@@ -1,0 +1,327 @@
+/* School-specific accents */
+.spell-card.school-enchantment {
+  --accent: #9b59b6;
+  --accent-glow: rgba(155, 89, 182, 0.3);
+}
+.spell-card.school-evocation {
+  --accent: #e74c3c;
+  --accent-glow: rgba(231, 76, 60, 0.3);
+}
+.spell-card.school-necromancy {
+  --accent: #2ecc71;
+  --accent-glow: rgba(46, 204, 113, 0.3);
+}
+.spell-card.school-illusion {
+  --accent: #3498db;
+  --accent-glow: rgba(52, 152, 219, 0.3);
+}
+.spell-card.school-abjuration {
+  --accent: #f39c12;
+  --accent-glow: rgba(243, 156, 18, 0.3);
+}
+.spell-card.school-divination {
+  --accent: #1abc9c;
+  --accent-glow: rgba(26, 188, 156, 0.3);
+}
+.spell-card.school-conjuration {
+  --accent: #e67e22;
+  --accent-glow: rgba(230, 126, 34, 0.3);
+}
+.spell-card.school-transmutation {
+  --accent: #27ae60;
+  --accent-glow: rgba(39, 174, 96, 0.3);
+}
+
+/* ── Card Shell ────────────────────────────────────────────────── */
+.spell-card {
+  position: relative;
+  width: 300px;
+  padding: 16px 16px 14px;
+  background:
+    radial-gradient(
+      ellipse at 20% 10%,
+      rgba(255, 248, 220, 0.7) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 80% 90%,
+      rgba(200, 150, 80, 0.18) 0%,
+      transparent 55%
+    ),
+    var(--parchment);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 40px rgba(160, 120, 40, 0.15),
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  font-family: "IM Fell English", Georgia, serif;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* Aged edge vignette */
+.spell-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  box-shadow: inset 0 0 60px rgba(100, 60, 10, 0.2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Corner Flourishes ─────────────────────────────────────────── */
+.corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-color: var(--gold-dark);
+  border-style: solid;
+  opacity: 0.7;
+}
+.corner-tl {
+  top: 8px;
+  left: 8px;
+  border-width: 2px 0 0 2px;
+}
+.corner-tr {
+  top: 8px;
+  right: 8px;
+  border-width: 2px 2px 0 0;
+}
+.corner-bl {
+  bottom: 8px;
+  left: 8px;
+  border-width: 0 0 2px 2px;
+}
+.corner-br {
+  bottom: 8px;
+  right: 8px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.spell-header {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  z-index: 1;
+}
+
+.spell-glyph {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px var(--accent-glow);
+  color: var(--accent);
+  line-height: 1;
+}
+
+.spell-title-block {
+  flex: 1;
+  min-width: 0;
+}
+
+.spell-name {
+  font-family: "Cinzel", serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 4px;
+  text-shadow: 0 1px 2px rgba(255, 248, 220, 0.8);
+  line-height: 1.2;
+  text-align: left;
+}
+
+.spell-subtitle {
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-light);
+  text-transform: uppercase;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  text-align: left;
+}
+
+/* ── Badges ────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 2px;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.badge-ritual {
+  background: rgba(39, 174, 96, 0.18);
+  color: #1a6b3a;
+  border: 1px solid #27ae60;
+}
+.badge-concentration {
+  background: rgba(var(--accent), 0.15);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  background: var(--accent-glow);
+}
+
+/* ── Divider ───────────────────────────────────────────────────── */
+.spell-divider {
+  position: relative;
+  margin: 9px 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--gold-dark) 20%,
+    var(--gold) 50%,
+    var(--gold-dark) 80%,
+    transparent
+  );
+  z-index: 1;
+}
+
+/* ── Stat Grid ─────────────────────────────────────────────────── */
+.spell-stats {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px 10px;
+  z-index: 1;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.stat-label {
+  font-family: "Cinzel", serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.stat-value {
+  font-size: 0.75rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* ── Material ──────────────────────────────────────────────────── */
+.spell-material {
+  position: relative;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--ink-light);
+  margin: 8px 0 0;
+  z-index: 1;
+}
+
+.spell-material em {
+  font-style: normal;
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+/* ── Description ───────────────────────────────────────────────── */
+.spell-desc {
+  position: relative;
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--ink);
+  z-index: 1;
+  text-align: left;
+  text-indent: 1em;
+}
+
+.spell-desc p + p {
+  margin-top: 8px;
+}
+
+/* ── Higher Level ──────────────────────────────────────────────── */
+.spell-higher-level {
+  position: relative;
+  margin-top: 12px;
+  padding: 10px 13px;
+  background: rgba(160, 120, 40, 0.1);
+  border-left: 3px solid var(--accent);
+  font-size: 0.73rem;
+  line-height: 1.6;
+  color: var(--ink-light);
+  border-radius: 0 3px 3px 0;
+  z-index: 1;
+  text-align: left;
+}
+
+.higher-level-label {
+  font-family: "Cinzel", serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+/* ── Footer / Tags ─────────────────────────────────────────────── */
+.spell-footer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1;
+}
+
+.spell-tags-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.tags-label {
+  font-family: "Cinzel", serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.spell-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  padding: 2px 10px;
+  background: rgba(160, 120, 40, 0.15);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: "Cinzel", serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-light);
+}
+
+.tag-sub {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--ink-light);
+  opacity: 0.8;
+}
