@@ -24,7 +24,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.db
+*.db
 Thumbs.db
 
 client/.vite/
