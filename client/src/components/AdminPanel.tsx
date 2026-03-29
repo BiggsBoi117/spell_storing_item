@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { syncAllSpells } from "../api/localApi";
+import "../styles/Admin.css";
 
 export function AdminPanel() {
   const [syncing, setSyncing] = useState(false);
@@ -47,21 +48,26 @@ export function AdminPanel() {
     : 0;
 
   return (
-    <section>
+    <section className="admin-panel">
       <h2>Admin Panel</h2>
-      <div>
+      <div className="admin-section">
         <h3>Sync Spell Data</h3>
         <p>
           Fetches all spells from the D&D API and populates the local database
-          with class and subclass associations. Only needs to be run once.
+          with class and subclass associations. This will take a few minutes.
         </p>
-        <button onClick={handleSync} disabled={syncing}>
+        <button
+          className="admin-sync-button"
+          onClick={handleSync}
+          disabled={syncing}
+        >
           {syncing ? "Syncing..." : "Sync All Spells"}
         </button>
         {syncing && progress && (
-          <div>
-            <div style={{ marginTop: "1rem" }}>
+          <div className="admin-progress">
+            <div className="admin-progress-track" style={{ marginTop: "1rem" }}>
               <div
+                className="admin-progress-fill"
                 style={{
                   height: "8px",
                   background: "var(--ink)",
@@ -71,16 +77,21 @@ export function AdminPanel() {
                 }}
               />
             </div>
-            <p>
+            <p className="admin-progress-label">
               {progress.current} / {progress.total} — {progress.name}
             </p>
           </div>
         )}
         {syncStatus === "success" && (
-          <p>Sync complete! All spells have been cached.</p>
+          <p className="admin-status-success">
+            Sync complete! All spells names/indexes have been cached to quick
+            reference lists.
+          </p>
         )}
         {syncStatus === "error" && (
-          <p>Sync failed. Check that the server is running and try again.</p>
+          <p className="admin-status-error">
+            Sync failed. Check that the server is running and try again.
+          </p>
         )}
       </div>
     </section>

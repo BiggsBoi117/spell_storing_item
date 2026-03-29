@@ -1,0 +1,142 @@
+/* ── Admin Panel Wrapper ───────────────────────────────────────── */
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.admin-panel h2 {
+  font-family: "Cinzel", serif;
+  font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+  font-weight: 600;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+  margin: 0 0 16px;
+  padding: 6px 14px;
+  border: 1px solid var(--gold);
+  background-color: var(--parchment-dark);
+  width: fit-content;
+  border-radius: 2px;
+}
+
+/* ── Sync Section ──────────────────────────────────────────────── */
+.admin-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background:
+    radial-gradient(
+      ellipse at 20% 10%,
+      rgba(255, 248, 220, 0.7) 0%,
+      transparent 60%
+    ),
+    var(--parchment);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.admin-section h3 {
+  font-family: "Cinzel", serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.admin-section p {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Sync Button ───────────────────────────────────────────────── */
+.admin-sync-button {
+  font-family: "Cinzel", serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--parchment);
+  background-color: var(--ink-light);
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  padding: 8px 20px;
+  cursor: pointer;
+  width: fit-content;
+  transition:
+    background-color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.admin-sync-button:hover:not(:disabled) {
+  background-color: var(--ink);
+}
+
+.admin-sync-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Progress Bar ──────────────────────────────────────────────── */
+.admin-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-progress-track {
+  width: 100%;
+  height: 6px;
+  background-color: var(--parchment-dark);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.admin-progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, var(--gold-dark), var(--gold));
+  border-radius: 999px;
+  transition: width 0.2s ease;
+}
+
+.admin-progress-label {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: 0.78rem;
+  color: var(--ink-light);
+  margin: 0;
+}
+
+/* ── Status Messages ───────────────────────────────────────────── */
+.admin-status-success {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #1a6b3a;
+  padding: 6px 12px;
+  border: 1px solid #27ae60;
+  background: rgba(39, 174, 96, 0.1);
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.admin-status-error {
+  font-family: "IM Fell English", Georgia, serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: #8b1a1a;
+  padding: 6px 12px;
+  border: 1px solid #8b1a1a;
+  background: rgba(139, 26, 26, 0.1);
+  border-radius: 3px;
+  width: fit-content;
+}
