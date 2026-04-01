@@ -4,24 +4,6 @@ interface ApiReference {
   url: string;
 }
 
-export interface SpellSchool {
-  index: string;
-  name: string;
-  url: string;
-}
-
-export interface SpellClass {
-  index: string;
-  name: string;
-  url: string;
-}
-
-export interface SpellSubclass {
-  index: string;
-  name: string;
-  url: string;
-}
-
 export type Spell = {
   index: string;
   name: string;
