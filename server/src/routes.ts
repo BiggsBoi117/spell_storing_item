@@ -77,15 +77,6 @@ router.get("/filter", (req: Request, res: Response) => {
     return res.json(rows);
   }
 
-  if (subclass) {
-    const rows = db
-      .prepare(
-        `SELECT DISTINCT spell_index FROM spell_subclasses WHERE subclass_name = ?`,
-      )
-      .all(subclass as string);
-    return res.json(rows);
-  }
-
   res.json([]);
 });
 
@@ -99,13 +90,6 @@ router.post("/sync/spell", async (req: Request, res: Response) => {
     db.prepare(`INSERT OR IGNORE INTO spell_classes VALUES (?, ?)`).run(
       spell_index,
       c,
-    );
-  }
-
-  for (const s of subclasses ?? []) {
-    db.prepare(`INSERT OR IGNORE INTO spell_subclasses VALUES (?, ?)`).run(
-      spell_index,
-      s,
     );
   }
 
@@ -140,15 +124,6 @@ router.get("/sync/all", async (req: Request, res: Response) => {
           c.index,
         );
       }
-
-      for (const s of data.subclasses ?? []) {
-        db.prepare(`INSERT OR IGNORE INTO spell_subclasses VALUES (?, ?)`).run(
-          data.index,
-          s.index,
-        );
-      }
-
-      send({ current: i + 1, total, name: data.name });
     }
 
     send({ done: true });

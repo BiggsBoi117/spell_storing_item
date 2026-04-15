@@ -14,12 +14,6 @@ db.exec(`
     class_name TEXT NOT NULL,
     PRIMARY KEY (spell_index, class_name)
   );
-
-  CREATE TABLE IF NOT EXISTS spell_subclasses (
-    spell_index TEXT NOT NULL,
-    subclass_name TEXT NOT NULL,
-    PRIMARY KEY (spell_index, subclass_name)
-  );
 `);
 
 export default db;

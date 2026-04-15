@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import {
   getClasses,
-  getSubclasses,
   filterSpells,
   saveSpell,
   getSavedSpells,
@@ -19,9 +18,7 @@ const BASE_API = import.meta.env.VITE_DND_API_URL;
 
 export function SpellSearch() {
   const [classes, setClasses] = useState<string[]>([]);
-  const [subclasses, setSubclasses] = useState<string[]>([]);
   const [selectedClass, setSelectedClass] = useState<string>("");
-  const [selectedSubclass, setSelectedSubclass] = useState<string>("");
 
   const [results, setResults] = useState<string[]>([]);
   const [searching, setSearching] = useState(false);
@@ -40,13 +37,8 @@ export function SpellSearch() {
   // Load dropdowns on mount
   useEffect(() => {
     (async () => {
-      const [c, s, saved] = await Promise.all([
-        getClasses(),
-        getSubclasses(),
-        getSavedSpells(),
-      ]);
+      const [c, saved] = await Promise.all([getClasses(), getSavedSpells()]);
       setClasses(c);
-      setSubclasses(s);
       setSavedIndexes(
         new Set(saved.map((s: { spell_index: any }) => s.spell_index)),
       );
@@ -54,15 +46,12 @@ export function SpellSearch() {
   }, []);
 
   const handleSearch = async () => {
-    if (!selectedClass && !selectedSubclass) return;
+    if (!selectedClass) return;
     setSearching(true);
     setSearched(true);
     setExpandedIndex(null);
     setExpandedSpell(null);
-    const indexes = await filterSpells(
-      selectedClass || undefined,
-      selectedSubclass || undefined,
-    );
+    const indexes = await filterSpells(selectedClass || undefined);
     setResults(indexes);
     setSearching(false);
   };
@@ -129,21 +118,7 @@ export function SpellSearch() {
             </option>
           ))}
         </select>
-        <select
-          value={selectedSubclass}
-          onChange={(e) => setSelectedSubclass(e.target.value)}
-        >
-          <option value="">All Subclasses</option>
-          {subclasses.map((s) => (
-            <option key={s} value={s}>
-              {s.charAt(0).toUpperCase() + s.slice(1)}
-            </option>
-          ))}
-        </select>
-        <button
-          onClick={handleSearch}
-          disabled={searching || (!selectedClass && !selectedSubclass)}
-        >
+        <button onClick={handleSearch} disabled={searching || !selectedClass}>
           Search
         </button>
       </div>
