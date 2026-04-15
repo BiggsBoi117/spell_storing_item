@@ -1,73 +1,27 @@
-# React + TypeScript + Vite
+# Spell Storing Item
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The name is inspired by a magic item from Dungeons and Dragons that holds spell charges.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The app has a backend (typescript server) and front end (vite formatted react/typescript)
 
-## React Compiler
+The frontend makes api calls both to the backend (SQLite) and to an external api (D&D 5e api)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Startup
 
-## Expanding the ESLint configuration
+To run the dev version, a bash module called concurrently will be installed with _npm install_
+Concurrently is set up with a script to start both the frontend and backend.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The first time the backend starts up, it will make an empty SQLite database with two tables: _spell classes_ and _my spells_
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Navigate to "Admin" via navbar or hamburger menu and run the sync feature. This will run a one time script to populate the _spell classes_ table.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Use
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Once the _spell classes_ table is populated, you can navigate to search to search a spell by name or filter by class.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Clicking on a spell will fetch from the D&D API the spell's information and expand the card to display the fetched info in a dropdown.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+You can also add any spell from the search results to your "spellbook". Navigate to "My Spellbook" afterwards and you will see the spells in a readily accesible list.
+The add button adds the bare minimum search params to the _my spells_ table.
