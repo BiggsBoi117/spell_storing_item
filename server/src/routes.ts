@@ -41,50 +41,34 @@ router.get("/classes", (req: Request, res: Response) => {
   res.json(rows);
 });
 
-// Get all unique subclasses from the cache
-router.get("/subclasses", (req: Request, res: Response) => {
+// Get spell indexes filtered by class
+router.get("/filter", (req: Request, res: Response) => {
+  const { class: className } = req.query;
+
+  if (typeof className !== "string") {
+    return res.json([]);
+  }
+
+  if (className === "all") {
+    const rows = db
+      .prepare(`SELECT DISTINCT spell_index FROM spell_classes`)
+      .all();
+    return res.json(rows);
+  }
+
   const rows = db
     .prepare(
-      `SELECT DISTINCT subclass_name FROM spell_subclasses ORDER BY subclass_name`,
+      `SELECT DISTINCT spell_index FROM spell_classes WHERE class_name = ?`,
     )
-    .all();
+    .all(className);
   res.json(rows);
-});
-
-// Get spell indexes filtered by class and/or subclass
-router.get("/filter", (req: Request, res: Response) => {
-  const { class: className, subclass } = req.query;
-
-  if (className && subclass) {
-    const rows = db
-      .prepare(
-        `
-      SELECT DISTINCT sc.spell_index FROM spell_classes sc
-      JOIN spell_subclasses ss ON sc.spell_index = ss.spell_index
-      WHERE sc.class_name = ? AND ss.subclass_name = ?
-    `,
-      )
-      .all(className as string, subclass as string);
-    return res.json(rows);
-  }
-
-  if (className) {
-    const rows = db
-      .prepare(
-        `SELECT DISTINCT spell_index FROM spell_classes WHERE class_name = ?`,
-      )
-      .all(className as string);
-    return res.json(rows);
-  }
-
-  res.json([]);
 });
 
 // ----- syncing methods -----
 
-// Sync a single spell's class/subclass data
+// Sync a single spell's class data
 router.post("/sync/spell", async (req: Request, res: Response) => {
-  const { spell_index, classes, subclasses } = req.body;
+  const { spell_index, classes } = req.body;
 
   for (const c of classes ?? []) {
     db.prepare(`INSERT OR IGNORE INTO spell_classes VALUES (?, ?)`).run(
@@ -132,6 +116,21 @@ router.get("/sync/all", async (req: Request, res: Response) => {
   } finally {
     res.end();
   }
+});
+
+// Search for a spell by name
+router.get("/spells/search", (req: Request, res: Response) => {
+  const { name } = req.query;
+  if (!name) return res.json([]);
+  const rows = db
+    .prepare(
+      `
+    SELECT spell_index, name FROM my_spells
+    WHERE LOWER(name) LIKE LOWER(?)
+  `,
+    )
+    .all(`%${name}%`);
+  res.json(rows);
 });
 
 export default router;

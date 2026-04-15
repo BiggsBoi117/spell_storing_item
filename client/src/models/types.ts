@@ -9,3 +9,5 @@ export type Result<T> =
   | { ok: false; error: FetchError };
 
 export type View = "spellSearch" | "mySpellbook" | "adminPanel";
+
+export type SpellResult = { index: string; name: string };

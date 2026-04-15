@@ -1,3 +1,5 @@
+import { type SpellResult } from "../models/types";
+
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 // Get all saved spells in the spellbook
@@ -79,14 +81,19 @@ export const getSubclasses = async (): Promise<string[]> => {
 };
 
 // Get spell indexes filtered by class and/or subclass
-export const filterSpells = async (
-  className?: string,
-  subclass?: string,
-): Promise<string[]> => {
+export const filterSpells = async (className?: string): Promise<string[]> => {
   const params = new URLSearchParams();
   if (className) params.append("class", className);
-  if (subclass) params.append("subclass", subclass);
   const res = await fetch(`${BASE_URL}/api/filter?${params.toString()}`);
   const rows = await res.json();
   return rows.map((r: { spell_index: string }) => r.spell_index);
+};
+
+export const searchSpellsByNameLocal = async (
+  name: string,
+): Promise<SpellResult[]> => {
+  const res = await fetch(
+    `${BASE_URL}/api/spells/search?name=${encodeURIComponent(name)}`,
+  );
+  return res.json();
 };
